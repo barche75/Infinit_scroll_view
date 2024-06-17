@@ -11,6 +11,8 @@
 		BFB770622C2090AF0067973F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB770612C2090AF0067973F /* ContentView.swift */; };
 		BFB770642C2090B00067973F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB770632C2090B00067973F /* Assets.xcassets */; };
 		BFB770672C2090B00067973F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB770662C2090B00067973F /* Preview Assets.xcassets */; };
+		BFB7706E2C2090F00067973F /* DSInfiniteZoomScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB7706D2C2090F00067973F /* DSInfiniteZoomScroll.swift */; };
+		BFB770702C2092430067973F /* Healpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB7706F2C2092430067973F /* Healpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		BFB770612C2090AF0067973F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFB770632C2090B00067973F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFB770662C2090B00067973F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BFB7706D2C2090F00067973F /* DSInfiniteZoomScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSInfiniteZoomScroll.swift; sourceTree = "<group>"; };
+		BFB7706F2C2092430067973F /* Healpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Healpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +55,11 @@
 		BFB7705E2C2090AF0067973F /* InfiniteScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				BFB7705F2C2090AF0067973F /* InfiniteScrollViewApp.swift */,
-				BFB770612C2090AF0067973F /* ContentView.swift */,
 				BFB770632C2090B00067973F /* Assets.xcassets */,
+				BFB770612C2090AF0067973F /* ContentView.swift */,
+				BFB7706D2C2090F00067973F /* DSInfiniteZoomScroll.swift */,
+				BFB7706F2C2092430067973F /* Healpers.swift */,
+				BFB7705F2C2090AF0067973F /* InfiniteScrollViewApp.swift */,
 				BFB770652C2090B00067973F /* Preview Content */,
 			);
 			path = InfiniteScrollView;
@@ -138,7 +144,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFB770622C2090AF0067973F /* ContentView.swift in Sources */,
+				BFB770702C2092430067973F /* Healpers.swift in Sources */,
 				BFB770602C2090AF0067973F /* InfiniteScrollViewApp.swift in Sources */,
+				BFB7706E2C2090F00067973F /* DSInfiniteZoomScroll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +288,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -287,6 +296,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = barche.com.InfiniteScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -309,6 +322,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,6 +330,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = barche.com.InfiniteScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
