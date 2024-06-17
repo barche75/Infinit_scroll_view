@@ -17,35 +17,38 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
 
     private let triggerWidth = 300.0
 
-    // флаг говорящий о том что пора сбросить позицию скрола
+    // time to reset scrolls while next alignment
     @State private var timeToReset = false
-    // считает сколько раз первый элемент исчез с экрана
+    // how much times first element did disappear for screen
     @State private var firstElementDisappearCount = 0
-    // хранит в себе первый элемент
+    // first element
     @State private var firstElement: ElementWrapper<Model>?
-    // элемент в центре в данный момент времени
+    // element in center
     @State private var centeredElement: ElementWrapper<Model>?
-    // элемент в центре в при медленном скроле
+    // element in center when slow sroll
     @State private var slowCenteredElement: ElementWrapper<Model>?
-    // это положение и размеры скрола в пространстве
+    // ScrollView position and size
     @State private var scrollRect: CGRect = .zero
-    // виден сейчас экран или нет
-    @State private var isVisible = false
-    // элементы скрола
+    // Array of elements
     @State private var elementsToShow: [ElementWrapper<Model>] = []
-    // считает сколько времени карточка находится в зоне влияния центра экрана
-    // это необходимо для автоматического центрирования
+    // How much time cell stays close to screen's center (it's not time but just counter)
     @State private var inCenterTimeCount = 0.0
-    // храни в себе карточку у которой самый большой размер в данный момент (возможно это значение можно заменить на centeredelement...)
+    // biggest card in current moment (maybe can be replaced with centeredelement...)
     @State private var biggestCard: ElementWrapper<Model>?
-    // элемент для сброса положения прокрутки
+    // this element used to reset scroll's position
     @State private var resetItem: ElementWrapper<Model>?
-    // отвечает за переключение скролов
+    // scrolls toggle
     @State private var scrollAppearance = true
-    // Появлялся ли экран, нудно для корректного отображения контента при возврате
+    // for Navigation view (not used in this example)
     @State private var isFirstAppearance = true
     // Use animation or not
     @State var isAnimationNeeded = false
+    // Allow user's interaction
+    @State var allowUserInteraction = true
+
+    // ScreenTouchObserver - helper to track user's interaction with screen
+    // Not implemented in this example
+    // I use it to handle long gestures, when user holds finger on screen and move it
 
     @Binding private var items: [Model]
 
@@ -107,6 +110,7 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
                         }
                     }
                 }
+                .allowsHitTesting(allowUserInteraction)
                 .opacity(scrollAppearance ? 0 : 1)
 
                 // Front scroll
@@ -157,16 +161,13 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
                         }
                     }
                 }
+                .allowsHitTesting(allowUserInteraction)
                 .opacity(scrollAppearance ? 1 : 0)
             }
             .onAppear {
-                isVisible = true
                 guard isFirstAppearance else { return }
                 isFirstAppearance = false
                 items.isEmpty ? () : convert(items)
-            }
-            .onDisappear {
-                isVisible = false
             }
             .onChange(of: items) { newItems in
                 newItems.isEmpty ? () : convert(items)
@@ -203,6 +204,7 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
 //        }
     }
 
+    // this method handles long touch gestures (dot used in this example)
     private func handleSlowScroll(state: UIGestureRecognizer.State, velocity: Double, count: Int) {
         if state == .ended, count > 10 {
             let positionBig = biggestCard?.position ?? 0
@@ -234,7 +236,7 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
 
     private func resetScroll(if timeToReset: Bool, to item: ElementWrapper<Model>) {
         guard timeToReset else { return }
-        print("--- prepare to scroll toggle")
+        self.allowUserInteraction = false
         self.timeToReset = false
         let filtered = elementsToShow.filter { $0.element == item.element }.map { $0.position }
         let filteredCount = filtered.count
@@ -244,7 +246,7 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
         if let item = elementsToShow.first(where: { $0.position == newIndex }) {
             resetItem = item
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                print("--- toggle now")
+                self.allowUserInteraction = true
                 self.scrollAppearance.toggle()
             }
         }
@@ -255,7 +257,7 @@ public struct DSInfiniteZoomScroll<Model: Hashable, Content: View>: View {
         var indexesOfFirstElement: [Int] = []
         var result: [ElementWrapper<Model>] = []
         var number = 0
-        for _ in 0...10 {
+        for _ in 0...15 {
             original.forEach { originalElement in
                 let wrapped = ElementWrapper<Model>(position: number, element: originalElement)
                 result.append(wrapped)
